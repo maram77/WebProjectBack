@@ -20,7 +20,9 @@ public class PurchaseOrder {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
     private String address;
 
     // Newly added attribute

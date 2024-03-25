@@ -2,6 +2,7 @@ package com.example.web_project.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productReference")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Product {
     @Id
     @Column(length = 50, unique = true)
@@ -94,4 +96,5 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }

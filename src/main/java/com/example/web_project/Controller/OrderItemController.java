@@ -1,7 +1,11 @@
 package com.example.web_project.Controller;
 
+import com.example.web_project.Entity.Cart;
 import com.example.web_project.Entity.OrderItem;
+import com.example.web_project.Entity.Product;
+import com.example.web_project.Service.CartService;
 import com.example.web_project.Service.OrderItemService;
+import com.example.web_project.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +16,14 @@ import java.util.List;
 public class OrderItemController {
 
     private final OrderItemService orderItemService;
+    private final CartService cartService;
+    private final ProductService productService;
 
     @Autowired
-    public OrderItemController(OrderItemService orderItemService) {
+    public OrderItemController(OrderItemService orderItemService, CartService cartService, ProductService productService) {
         this.orderItemService = orderItemService;
+        this.cartService = cartService;
+        this.productService = productService;
     }
 
     @GetMapping
@@ -30,7 +38,18 @@ public class OrderItemController {
 
     @PostMapping
     public OrderItem createOrderItem(@RequestBody OrderItem orderItem) {
+
+        Long cartId = orderItem.getCart().getIdCart();
+
+        Cart cart = cartService.getCartById(cartId);
+        orderItem.setCart(cart);
+
+        Product product = productService.getProductByReference(orderItem.getProduct().getProductReference());
+
+        orderItem.setProduct(product);
+
         return orderItemService.saveOrderItem(orderItem);
+
     }
 
     @PutMapping("/{id}")

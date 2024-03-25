@@ -14,7 +14,22 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
+    @OneToOne(mappedBy = "cart")
+    private PurchaseOrder purchaseOrder;
+
     public void setIdCart(Long id) {
         idCart = id ;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Long getIdCart() {
+        return idCart;
     }
 }

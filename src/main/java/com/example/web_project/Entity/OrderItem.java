@@ -13,6 +13,9 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private PurchaseOrder order;
 
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
@@ -59,4 +62,18 @@ public class OrderItem {
         return quantity * product.getPrice();
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+    public void setOrder(PurchaseOrder order) {
+        this.order = order;
+    }
+
+    public PurchaseOrder getOrder() {
+        return order;
+    }
 }

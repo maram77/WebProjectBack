@@ -44,4 +44,5 @@ public class ProductService {
     public Product getProductByReference(String productReference) {
         return productRepository.findByProductReference(productReference);
     }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/search")
+    @GetMapping("/searchByCategoryName")
     public ResponseEntity<List<Category>> searchCategories(@RequestParam String keyword) {
         List<Category> categories = categoryService.searchCategories(keyword);
         return ResponseEntity.ok(categories);
